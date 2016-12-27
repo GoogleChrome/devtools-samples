@@ -1,0 +1,10 @@
+{
+  "description": "The names of some Chrome DevTools Network panel features.",
+  "note": "https://developers.google.com/web/tools/chrome-devtools/network-performance depends on this file.",
+  "features": [
+    "Network Throttling",
+    "Screenshots",
+    "Disable Cache",
+    "Replay XHR"
+  ]
+}
