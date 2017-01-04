@@ -19,21 +19,30 @@
     <title>Demo: Get Started Debugging JavaScript with Chrome DevTools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+      h1 {
+        font-size: 1.5em
+      }
       input, button {
-        width: 50%;
-        height: 25%;
+        min-width: 72px;
+        min-height: 36px;
         border: 1px solid grey;
-        margin: 1%;
+      }
+      label, input, button {
+        display: block;
+      }
+      input {
+        margin-bottom: 1em;
       }
     </style>
   </head>
   <body>
     <h1>Demo: Get Started Debugging JavaScript with Chrome DevTools</h1>
-    <input placeholder="Number 1">
-    <input placeholder="Number 2">
+    <label for="num1">Number 1</label>
+    <input placeholder="Number 1" id="num1">
+    <label for="num2">Number 2</label>
+    <input placeholder="Number 2" id="num2">
     <button>Add Number 1 and Number 2</button>
     <p></p>
-    <script src="get-started-1.js"></script>
-    <script src="get-started-2.js"></script>
+    <script src="get-started.js"></script>
   </body>
 </html>
