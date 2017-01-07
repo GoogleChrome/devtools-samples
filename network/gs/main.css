@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Sans-Serif;
+}
+
+body, button {
+  background-color: #317efb;
+}
+
+form {
+  width: 90vw;
+  min-height: 90vh;
+  margin: 5vh 5vw;
+  background-color: white;
+}
+
+img {
+  max-height: 10vh;
+  margin: 5vh auto 0 auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3vh 0;
+}
+
+input, textarea {
+  border: 1px solid grey;
+  width: 60vw;
+  margin-right: 5vw;
+}
+
+label {
+  width: 15vw;
+  margin-right: 1vw;
+  text-align: right;
+}
+
+h1, button {
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.25em;
+  font-weight: normal;
+}
+
+button {
+  color: white;
+  padding: 1em;
+  border: none;
+}
