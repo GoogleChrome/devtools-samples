@@ -1,0 +1,50 @@
+<!--
+  Copyright 2016 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!doctype html>
+<html>
+  <head>
+    <title>CSS Variables Demo</title>
+    <style>
+      :root {
+        --primary: black;
+      }
+      h1, p, li {
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Variables Demo</h1>
+    <p>
+      All of the elements on this page are using a CSS variable for coloring.
+      To change the variable value from DevTools:
+    </p>
+    <ol>
+      <li>
+        Right-click this sentence and select <b>Inspect</b>. DevTools opens
+        and the <b>Elements</b> panel is in focus.
+      </li>
+      <li>
+        At the bottom of the <b>Styles</b> pane, find the CSS declaration
+        for <code>:root</code>.
+      </li>
+      <li>
+        Change the value of <code>--primary</code> from <code>black</code> to
+        some other color. All of the text on this page changes color.
+      </li>
+    </ol>
+  </body>
+</html>
