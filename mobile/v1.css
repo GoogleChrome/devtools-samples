@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+img {
+  max-width: 100%;
+}
+figcaption {
+  text-align: center;
+}
+.panel {
+  display: inline-block;
+  width: 25%;
+}
+.panels {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.title {
+  text-align: center;
+}
+@media (min-width: 600px) and (max-width: 999px) {
+  .panel {
+    width: 50%;
+  }
+}
+@media (max-width: 599px) and (orientation: landscape) {
+  .panel {
+    width: 25%;
+  }
+}
