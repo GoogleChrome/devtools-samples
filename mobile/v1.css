@@ -25,7 +25,7 @@ figcaption {
     width: 50%;
   }
 }
-@media (max-width: 599px) and (orientation: landscape) {
+@media (max-width: 599px) {
   .panel {
     width: 25%;
   }
