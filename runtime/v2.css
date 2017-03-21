@@ -1,0 +1,38 @@
+.nav-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+  pointer-events: none;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: beige;
+  height: 10vh;
+  width: 100vw;
+  z-index: 1;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 90vw;
+  background-color: aquamarine;
+  z-index: 3;
+  transform: translateX(-91vw);
+  will-change: transform;
+}
+.nav-layer__animating .nav {
+  transition: transform 300ms ease-in;
+}
+.nav-layer__visible.nav-layer__animating .nav {
+  transition: transform 300ms ease-out;
+}
+.nav-layer__visible .nav {
+  transform: none;
+}
