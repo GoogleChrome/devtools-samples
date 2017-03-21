@@ -1,0 +1,13 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #317EFB;
+  height: 10vh;
+  width: 100vw;
+  z-index: 1;
+}
+
+.header__open {
+  margin: 1em;
+}

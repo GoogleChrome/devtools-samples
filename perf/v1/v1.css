@@ -1,0 +1,20 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: beige;
+  height: 10vh;
+  width: 100vw;
+  z-index: 1;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 90vw;
+  background-color: aquamarine;
+  z-index: 2;
+}
+article {
+  margin-top: 11vh;
+}
