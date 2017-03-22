@@ -28,10 +28,10 @@
   will-change: transform;
 }
 .nav-layer__animating .nav {
-  transition: transform 300ms ease-in;
+  transition: transform 300ms linear;
 }
 .nav-layer__visible.nav-layer__animating .nav {
-  transition: transform 300ms ease-out;
+  transition: transform 300ms linear;
 }
 .nav-layer__visible .nav {
   transform: none;
