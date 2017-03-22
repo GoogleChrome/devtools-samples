@@ -2,8 +2,11 @@ var nav = document.querySelector('.nav'),
     open = document.querySelector('.open'),
     close = document.querySelector('.close');
 open.addEventListener('click', function() {
-  nav.classList.add('open');
+  console.log('open');
 });
 close.addEventListener('click', function() {
-  nav.classList.remove('open');
+  console.log('close');
+});
+window.addEventListener('load', function () {
+  nav.style.left = "-90vw";
 });
