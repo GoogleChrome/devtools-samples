@@ -5,7 +5,6 @@ function wait(ms){
      end = new Date().getTime();
   }
 }
-
 function openMenu() {
   if (position !== 0) {
     position += 1;
@@ -13,7 +12,6 @@ function openMenu() {
     setTimeout(openMenu, frameDuration);
   }
 }
-
 function closeMenu() {
   if (position !== -90) {
     position -= 1;
@@ -21,24 +19,22 @@ function closeMenu() {
     setTimeout(closeMenu, frameDuration);
   }
 }
-
 var nav,
     open,
     close,
     position = -90,
     // total animation time of 300ms / 90 iterations
     frameDuration = 300 / 90;
-
 window.addEventListener('load', function onLoad() {
   nav = document.querySelector('.nav');
-  open = document.querySelector('.open');
-  close = document.querySelector('.close');
+  open = document.querySelector('.header__open');
+  close = document.querySelector('.nav__close');
   open.addEventListener('click', function () {
-    wait(250);
+    wait(500);
     openMenu();
   });
   close.addEventListener('click', function () {
-    wait(250);
+    wait(500);
     closeMenu();
   });
   nav.style.left = position + 'vw';
