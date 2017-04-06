@@ -15,15 +15,16 @@
 (function(window) {
   'use strict';
 
-  var app = {};
-  var proto = document.querySelector('.proto');
-  var movers;
-  var bodySize = document.body.getBoundingClientRect();
-  var ballSize = proto.getBoundingClientRect();
-  var maxHeight = Math.floor(bodySize.height - ballSize.height);
-  var incrementor = 1;
-  var frame;
-  var subtract = document.querySelector('.subtract');
+  var app = {}, 
+      proto = document.querySelector('.proto'),
+      movers,
+      bodySize = document.body.getBoundingClientRect(),
+      ballSize = proto.getBoundingClientRect(),
+      maxHeight = Math.floor(bodySize.height - ballSize.height),
+      incrementor = 1,
+      frame,
+      subtract = document.querySelector('.subtract');
+
   app.optimize = false;
   app.count = 300;
 
@@ -120,7 +121,7 @@
   document.body.removeChild(proto);
   proto.classList.remove('.proto');
   app.init();
-
   window.app = app;
   frame = window.requestAnimationFrame(app.update);
+
 })(window);
