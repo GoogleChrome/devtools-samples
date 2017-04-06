@@ -15,18 +15,20 @@
 (function(window) {
   'use strict';
 
-  var app = {}, 
+  var app = {},
       proto = document.querySelector('.proto'),
       movers,
       bodySize = document.body.getBoundingClientRect(),
       ballSize = proto.getBoundingClientRect(),
       maxHeight = Math.floor(bodySize.height - ballSize.height),
-      incrementor = 1,
+      incrementor = 10, 
       frame,
-      subtract = document.querySelector('.subtract');
+      minimum = 10,
+      subtract = document.querySelector('.subtract'),
+      add = document.querySelector('.add');
 
   app.optimize = false;
-  app.count = 300;
+  app.count = minimum;
 
   app.init = function () {
     if (movers) {
@@ -53,8 +55,8 @@
     for (var i = 0; i < app.count; i++) {
       var m = movers[i];
       if (!app.optimize) {
-        m.style.top = (m.classList.contains('down') ? 
-            m.offsetTop + incrementor : m.offsetTop - incrementor) + 'px';
+        m.style.top = (m.classList.contains('down') ?
+            m.offsetTop + 1 : m.offsetTop - 1) + 'px';
         if (m.offsetTop === 0) {
           m.classList.remove('up');
           m.classList.add('down');
@@ -100,9 +102,9 @@
     }
   });
 
-  document.querySelector('.add').addEventListener('click', function (e) {
+  add.addEventListener('click', function (e) {
     cancelAnimationFrame(frame);
-    app.count += 100;
+    app.count += incrementor;
     subtract.disabled = false;
     app.init();
     frame = requestAnimationFrame(app.update);
@@ -110,14 +112,16 @@
 
   subtract.addEventListener('click', function () {
     cancelAnimationFrame(frame);
-    app.count = app.count - 100;
+    app.count -= incrementor;
     app.init();
     frame = requestAnimationFrame(app.update);
-    if (app.count === 100) {
+    if (app.count === minimum) {
       subtract.disabled = true;
     }
   });
 
+  add.textContent = 'Add ' + incrementor;
+  subtract.textContent = 'Subtract ' + incrementor;
   document.body.removeChild(proto);
   proto.classList.remove('.proto');
   app.init();
