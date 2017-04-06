@@ -12,27 +12,115 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
- function update(timestamp) {
-   for (var i = 0; i < count; i++) {
-     balls[i].style.left = ((Math.sin(balls[i].offsetTop + timestamp / 1000) + 1) * 500) + 'px';
-     //balls[i].style.left = ((Math.sin(i + timestamp / 1000) + 1) * 500) + 'px';
-   }
-   window.requestAnimationFrame(update);
-}
+(function(window) {
+  'use strict';
 
-var count = 100;
-var proto = document.querySelector('.proto');
-var balls = [proto];
-var bodySize = document.body.getBoundingClientRect();
-var ballSize = proto.getBoundingClientRect();
-var raf;
+  var app = {};
+  var proto = document.querySelector('.proto');
+  var movers;
+  var bodySize = document.body.getBoundingClientRect();
+  var ballSize = proto.getBoundingClientRect();
+  var maxHeight = Math.floor(bodySize.height - ballSize.height);
+  var incrementor = 1;
+  var frame;
+  var subtract = document.querySelector('.subtract');
+  app.optimize = false;
+  app.count = 300;
 
-for (var i = 0; i < count; i++) {
-  var b = proto.cloneNode();
-  b.style.top = i + 'vh';
-  b.style.left = Math.floor(Math.random() * bodySize.width - ballSize.width) + 'px';
-  document.body.appendChild(b);
-  balls.push(b);
-}
+  app.init = function () {
+    if (movers) {
+      for (var i = 0; i < movers.length; i++) {
+        document.body.removeChild(movers[i]);
+      }
+    }
+    for (var i = 0; i < app.count; i++) {
+      var m = proto.cloneNode();
+      var top = Math.floor(Math.random() * (maxHeight));
+      if (top === maxHeight) {
+        m.classList.add('up');
+      } else {
+        m.classList.add('down');
+      }
+      m.style.left = (i / (app.count / 100)) + 'vw';
+      m.style.top = top + 'px';
+      document.body.appendChild(m);
+    }
+    movers = document.querySelectorAll('.mover');
+  };
 
-window.requestAnimationFrame(update);
+  app.update = function (timestamp) {
+    for (var i = 0; i < app.count; i++) {
+      var m = movers[i];
+      if (!app.optimize) {
+        m.style.top = (m.classList.contains('down') ? 
+            m.offsetTop + incrementor : m.offsetTop - incrementor) + 'px';
+        if (m.offsetTop === 0) {
+          m.classList.remove('up');
+          m.classList.add('down');
+        }
+        if (m.offsetTop === maxHeight) {
+          m.classList.remove('down');
+          m.classList.add('up');
+        }
+      } else {
+        var pos = parseInt(m.style.top.slice(0, m.style.top.indexOf('px')));
+        m.classList.contains('down') ? pos += 1 : pos -= 1;
+        m.style.top = pos + 'px';
+        if (pos === 0) {
+          m.classList.remove('up');
+          m.classList.add('down');
+        }
+        if (pos === maxHeight) {
+          m.classList.remove('down');
+          m.classList.add('up');
+        }
+      }
+    }
+    frame = window.requestAnimationFrame(app.update);
+  }
+
+  document.querySelector('.stop').addEventListener('click', function (e) {
+    if (e.target.textContent === 'Stop') {
+      cancelAnimationFrame(frame);
+      e.target.textContent = 'Start';
+    } else {
+      frame = window.requestAnimationFrame(app.update);
+      e.target.textContent = 'Stop';
+    }
+  });
+
+  document.querySelector('.optimize').addEventListener('click', function (e) {
+    if (e.target.textContent === 'Optimize') {
+      app.optimize = true;
+      e.target.textContent = 'Un-Optimize';
+    } else {
+      app.optimize = false;
+      e.target.textContent = 'Optimize';
+    }
+  });
+
+  document.querySelector('.add').addEventListener('click', function (e) {
+    cancelAnimationFrame(frame);
+    app.count += 100;
+    subtract.disabled = false;
+    app.init();
+    frame = requestAnimationFrame(app.update);
+  });
+
+  subtract.addEventListener('click', function () {
+    cancelAnimationFrame(frame);
+    app.count = app.count - 100;
+    app.init();
+    frame = requestAnimationFrame(app.update);
+    if (app.count === 100) {
+      subtract.disabled = true;
+    }
+  });
+
+  document.body.removeChild(proto);
+  proto.classList.remove('.proto');
+  app.init();
+
+  window.app = app;
+  frame = window.requestAnimationFrame(app.update);
+})(window);

@@ -22,7 +22,19 @@ body {
   width: 100vw;
 }
 
-.proto {
-  height: 1vh;
+.controls {
+  position: fixed;
+  top: 2vw;
+  left: 2vw;
+  z-index: 1;
+}
+
+.mover {
+  height: 1vw;
   position: absolute;
+  z-index: 0;
+}
+
+.border {
+  border: 1px solid black;
 }
