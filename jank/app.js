@@ -33,9 +33,14 @@
 
   app.init = function () {
     if (movers) {
+      bodySize = document.body.getBoundingClientRect();
       for (var i = 0; i < movers.length; i++) {
         document.body.removeChild(movers[i]);
       }
+      document.body.appendChild(proto);
+      ballSize = proto.getBoundingClientRect();
+      document.body.removeChild(proto);
+      maxHeight = Math.floor(bodySize.height - ballSize.height);
     }
     for (var i = 0; i < app.count; i++) {
       var m = proto.cloneNode();
@@ -120,6 +125,29 @@
       subtract.disabled = true;
     }
   });
+
+  function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  var onResize = debounce(function () {
+    cancelAnimationFrame(frame);
+    app.init();
+    frame = requestAnimationFrame(app.update);
+  }, 500);
+
+  window.addEventListener('resize', onResize);
 
   add.textContent = 'Add ' + incrementor;
   subtract.textContent = 'Subtract ' + incrementor;
