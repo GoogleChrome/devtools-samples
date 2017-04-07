@@ -22,7 +22,8 @@
       ballSize = proto.getBoundingClientRect(),
       maxHeight = Math.floor(bodySize.height - ballSize.height),
       maxWidth = 97, // 100vw - width of square (3vw)
-      incrementor = 10, 
+      incrementor = 10,
+      distance = 3,
       frame,
       minimum = 10,
       subtract = document.querySelector('.subtract'),
@@ -61,8 +62,11 @@
     for (var i = 0; i < app.count; i++) {
       var m = movers[i];
       if (!app.optimize) {
-        m.style.top = (m.classList.contains('down') ?
-            m.offsetTop + 1 : m.offsetTop - 1) + 'px';
+        var pos = m.classList.contains('down') ?
+            m.offsetTop + distance : m.offsetTop - distance;
+        if (pos < 0) pos = 0;
+        if (pos > maxHeight) pos = maxHeight;
+        m.style.top = pos + 'px';
         if (m.offsetTop === 0) {
           m.classList.remove('up');
           m.classList.add('down');
@@ -73,7 +77,9 @@
         }
       } else {
         var pos = parseInt(m.style.top.slice(0, m.style.top.indexOf('px')));
-        m.classList.contains('down') ? pos += 1 : pos -= 1;
+        m.classList.contains('down') ? pos += distance : pos -= distance;
+        if (pos < 0) pos = 0;
+        if (pos > maxHeight) pos = maxHeight;
         m.style.top = pos + 'px';
         if (pos === 0) {
           m.classList.remove('up');
