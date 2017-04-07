@@ -29,12 +29,31 @@ body {
   z-index: 1;
 }
 
+.controls button {
+  display: block;
+  font-size: 1em;
+  padding: 1em;
+  margin: 1em;
+  background-color: beige;
+  color: black;
+}
+
+.subtract:disabled {
+  opacity: 0.2;
+}
+
 .mover {
-  height: 1vw;
+  height: 3vw;
   position: absolute;
   z-index: 0;
 }
 
 .border {
   border: 1px solid black;
+}
+
+@media (max-width: 600px) {
+  .controls button {
+    min-width: 20vw;
+  }
 }

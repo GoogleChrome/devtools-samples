@@ -21,6 +21,7 @@
       bodySize = document.body.getBoundingClientRect(),
       ballSize = proto.getBoundingClientRect(),
       maxHeight = Math.floor(bodySize.height - ballSize.height),
+      maxWidth = 97, // 100vw - width of square (3vw)
       incrementor = 10, 
       frame,
       minimum = 10,
@@ -44,7 +45,7 @@
       } else {
         m.classList.add('down');
       }
-      m.style.left = (i / (app.count / 100)) + 'vw';
+      m.style.left = (i / (app.count / maxWidth)) + 'vw';
       m.style.top = top + 'px';
       document.body.appendChild(m);
     }
