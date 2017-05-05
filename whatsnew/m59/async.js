@@ -31,3 +31,5 @@ async function runTest() {
   let result = await test();
   console.log(result);
 }
+
+runTest();
