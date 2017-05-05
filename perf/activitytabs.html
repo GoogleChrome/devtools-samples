@@ -16,12 +16,17 @@
 <!doctype html>
 <html>
   <head>
-    <title>Bottom-Up / Call Tree Demo</title>
+    <title>Activity Tabs Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>Bottom-Up / Call Tree Demo</h1>
-    <p>See <a href="https://developers.google/com/web/tools/chrome-devtools/evaluate-performance/reference#activity" target="_blank">View activity</a>.</p>
+    <h1>Activity Tabs Demo</h1>
+    <ol>
+      <li>Make a <a href="https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#record-runtime">runtime performance recording</a>.</li>
+      <li>Press <b>go</b>. The button is disabled and the page hangs.</li>
+      <li>Stop recording once the button becomes enabled again.</li>
+    </ol>
+    <p>See <a href="https://developers.google/com/web/tools/chrome-devtools/evaluate-performance/reference#activity" target="_blank">View activities</a> for context.</p>
     <button>go</button>
     <script>
       var button = document.querySelector('button');
