@@ -21,13 +21,13 @@ setInterval(() => 42, 200);
 
 async function test() {
   const hello = "world";
-  debugger;
   const tmp = await wait(1000);
   console.log(tmp);
   return hello;
 }
 
 async function runTest() {
+  debugger;
   let result = await test();
   console.log(result);
 }
