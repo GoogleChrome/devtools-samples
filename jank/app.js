@@ -31,6 +31,7 @@
 
   app.optimize = false;
   app.count = minimum;
+  app.enableApp = true;
 
   app.init = function () {
     if (movers) {
@@ -95,12 +96,14 @@
   }
 
   document.querySelector('.stop').addEventListener('click', function (e) {
-    if (e.target.textContent === 'Stop') {
+    if (app.enableApp) {
       cancelAnimationFrame(frame);
       e.target.textContent = 'Start';
+      app.enableApp = false;
     } else {
       frame = window.requestAnimationFrame(app.update);
       e.target.textContent = 'Stop';
+      app.enableApp = true;
     }
   });
 
@@ -148,9 +151,11 @@
   };
 
   var onResize = debounce(function () {
-    cancelAnimationFrame(frame);
-    app.init();
-    frame = requestAnimationFrame(app.update);
+    if (app.enableApp) {
+        cancelAnimationFrame(frame);
+        app.init();
+        frame = requestAnimationFrame(app.update);
+    }
   }, 500);
 
   window.addEventListener('resize', onResize);
