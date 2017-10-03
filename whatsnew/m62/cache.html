@@ -1,0 +1,75 @@
+<!--
+  Copyright 2017 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!doctype html>
+<html>
+  <head>
+    <title>Cache Storage Demo | What's New (Chrome 62)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      button {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cache Storage Demo</h1>
+    <p>Context: <a href="https://developers.google.com/web/updates/2017/08/devtools-release-notes#cache-debugging">More responsive cache debugging</a></p>
+    <button id="create-cache">Create <code>WNDT62</code> Cache</button>
+    <button id="create-resource" disabled>Create <code>RESOURCE_A</code> In <code>WNDT62</code></button>
+    <button id="update-resource" disabled>Update <code>RESOURCE_A</code></button>
+    <button id="delete-cache" disabled>Delete <code>WNDT62</code></button>
+    <script>
+      let resourceValue = 1;
+      window.addEventListener('load', () => {
+        const createCache = document.getElementById('create-cache'),
+            createResource = document.getElementById('create-resource'),
+            updateResource = document.getElementById('update-resource'),
+            deleteCache = document.getElementById('delete-cache');
+        createCache.addEventListener('click', () => {
+          (async function() {
+            const cache = await caches.open('WNDT62');
+            deleteCache.disabled = false;
+            createCache.disabled = true;
+            createResource.disabled = false;
+          })();
+        });
+        createResource.addEventListener('click', () => {
+          (async function() {
+            const cache = await caches.open('WNDT62');
+            cache.put('RESOURCE_A', new Response(1));
+            createResource.disabled = true;
+            updateResource.disabled = false;
+          })();
+        });
+        updateResource.addEventListener('click', () => {
+          (async function() {
+            resourceValue += 1;
+            const cache = await caches.open('WNDT62');
+            cache.put('RESOURCE_A', new Response(resourceValue));
+          })();
+        });
+        deleteCache.addEventListener('click', () => {
+          (async function() {
+            const cache = await caches.delete('WNDT62');
+            createCache.disabled = false;
+            deleteCache.disabled = true;
+            updateResource.disabled = true;
+          })();
+        });
+      });
+    </script>
+  </body>
+</html>
