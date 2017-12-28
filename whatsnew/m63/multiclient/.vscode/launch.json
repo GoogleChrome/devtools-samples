@@ -1,0 +1,20 @@
+{
+  "version": "0.0.0",
+  "configurations": [
+     { 
+       "name": "Stable",
+       "type": "chrome",
+       "request": "launch",
+       "url": "http://localhost:5000/index.html",
+       "webRoot": "${workspaceRoot}"
+     },
+     { 
+      "name": "Canary",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5000/index.html",
+      "webRoot": "${workspaceRoot}",
+      "runtimeExecutable": "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
+    }
+  ]
+}
